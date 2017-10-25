@@ -4,7 +4,13 @@ module.exports = {
   afterInstall: function () {
     return this.addPackagesToProject([
       {name: 'baobab', target: '^2.5.0'}
-    ]);
+    ]).then(() => {
+      return this.addAddonsToProject({
+        packages: [
+          {name: 'ember-emmett-shim', target: '*'}
+        ]
+      })
+    })
   },
 
   normalizeEntityName: function () {

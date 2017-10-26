@@ -2,7 +2,7 @@
 'use strict';
 const path = require('path');
 const mergeTrees = require('broccoli-merge-trees');
-const replace = require('broccoli-replace');
+// const replace = require('broccoli-replace');
 module.exports = {
   name: 'baobab',
   isDevelopingAddon() {
@@ -20,6 +20,13 @@ module.exports = {
 
       return app;
   },
+  included(app, parentAddon) {
+    var target = (parentAddon || app);
+    target.options = target.options || {};
+    target.options.babel = target.options.babel || { includePolyfill: true };
+    this._super.included.apply(this, arguments);
+    target.import('vendor/shims/baobab.js');
+  },
   treeForAddon (tree) {
     const app = this._findHost();
 
@@ -27,15 +34,15 @@ module.exports = {
     let reduxTree = this.treeGenerator(reduxPath);
 
     // Fix import paths to not include ".js" extension in name
-    reduxTree = replace(reduxTree, {
-      files: '**/*.js',
-      patterns: [
-        {
-          match: /process\.env\.NODE_ENV/g,
-          replacement: `"${app.env}"`
-        }
-      ]
-    });
+    // reduxTree = replace(reduxTree, {
+    //   files: '**/*.js',
+    //   patterns: [
+    //     {
+    //       match: /process\.env\.NODE_ENV/g,
+    //       replacement: `"${app.env}"`
+    //     }
+    //   ]
+    // });
 
     // let addon = this.addons.find(addon => addon.name === 'ember-cli-babel');
 

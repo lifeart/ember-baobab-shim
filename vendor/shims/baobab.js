@@ -1,15 +1,13 @@
-import baobab from 'baobab/baobab';
-
 (function() {
   /* globals define, self */
-  function vendorModule() {
+  function vendorModule(trueBaobab) {
     'use strict';
 
     return {
-      'default': baobab,
+      'default': trueBaobab,
       __esModule: true,
     };
   }
   // export an object with a default property that contains the 'hljs' global.
-  define('baobab/index', [], vendorModule);
+  define('baobab', ['baobab/baobab'], vendorModule);
 })();

@@ -45,6 +45,7 @@
     "ember-addon"
   ],
   "dependencies": {
+    "broccoli-replace": "^0.12.0",
     "ember-cli-babel": "^5.1.6"
   },
   "ember-addon": {

@@ -3,7 +3,8 @@ module.exports = {
   desctipion: 'Baobab shim for Ember.js',
   afterInstall: function () {
     return this.addPackagesToProject([
-      {name: 'baobab', target: '^2.5.0'}
+      {name: 'baobab', target: '^2.5.0'},
+      {name: 'broccoli-replace', target: '*'}
     ]).then(() => {
       return this.addAddonsToProject({
         packages: [
